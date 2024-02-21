@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
         }
+
         .container {
             max-width: 600px;
             margin: 50px auto;
@@ -19,16 +20,19 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+
         h1 {
             text-align: center;
             margin-bottom: 30px;
         }
+
         .timestamp {
             font-size: 24px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 20px;
         }
+
         .generate-btn {
             display: block;
             width: 100%;
@@ -41,12 +45,15 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .generate-btn:hover {
             background-color: #0056b3;
         }
+
         .converter {
             margin-top: 40px;
         }
+
         .converter input,
         .converter button {
             width: 100%;
@@ -56,6 +63,7 @@
             border-radius: 4px;
             border: 1px solid #ccc;
         }
+
         .converter button {
             background-color: #007bff;
             color: #fff;
@@ -80,14 +88,16 @@
 <body onload="redirectBasedOnLanguage()">
     <div class="container">
         <h1>简易时间戳生成器</h1>
-        <div class="timestamp" id="timestamp"><code>获取时间戳</code></div>
+        <div class="timestamp" id="timestamp">获取时间戳</div>
         <button class="generate-btn" id="generateBtn">获取服务器时间戳</button>
+
         <div class="converter">
             <input type="text" id="timestampInput" placeholder="输入时间戳或时间">
             <button id="convertBtn">转换</button>
             <div id="convertedResult"></div>
         </div>
     </div>
+
     <script>
         const generateBtn = document.getElementById('generateBtn');
         const timestamp = document.getElementById('timestamp');
@@ -100,28 +110,27 @@
             const serverTimestamp = now.getTime();
             timestamp.innerHTML = `时间戳: ${serverTimestamp} - 时间:${now.toISOString()}`;
         });
-        const now = new Date();
-        const serverTimestamp = now.getTime();
-        timestamp.innerHTML = `时间戳: ${serverTimestamp} - 时间:${now.toISOString()}`;
-    });
-    convertBtn.addEventListener('click', function() {
-        const input = timestampInput.value.trim();
-        let result;
-        if (!isNaN(input)) {
-            // 如果输入的是时间戳
-            const date = new Date(parseInt(input));
-            result = date.toISOString();
-        } else {
-            // 如果输入的是时间字符串
-            const date = new Date(input);
-            if (!isNaN(date.getTime())) {
-                result = date.getTime();
+
+        convertBtn.addEventListener('click', function() {
+            const input = timestampInput.value.trim();
+            let result;
+
+            if (!isNaN(input)) {
+                // 如果输入的是时间戳
+                const date = new Date(parseInt(input));
+                result = date.toISOString();
             } else {
-                result = "Invalid input";
+                // 如果输入的是时间字符串
+                const date = new Date(input);
+                if (!isNaN(date.getTime())) {
+                    result = date.getTime();
+                } else {
+                    result = "无效输入";
+                }
             }
-        }
-        convertedResult.innerHTML = result;
-    });
-</script>
+
+            convertedResult.innerHTML = result;
+        });
+    </script>
 </body>
 </html>
