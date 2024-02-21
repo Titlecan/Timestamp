@@ -102,7 +102,7 @@
         });
         const now = new Date();
         const serverTimestamp = now.getTime();
-        timestamp.innerHTML = `<code>时间戳: ${serverTimestamp} - 时间:${now.toISOString()}</code>`;
+        timestamp.innerHTML = `时间戳: ${serverTimestamp} - 时间:${now.toISOString()}`;
     });
     convertBtn.addEventListener('click', function() {
         const input = timestampInput.value.trim();
