@@ -108,7 +108,7 @@
         generateBtn.addEventListener('click', function() {
             const now = new Date();
             const serverTimestamp = now.getTime();
-            timestamp.innerHTML = `Timestamp: ${serverTimestamp}<br>Time:${now.toISOString()}`;
+            timestamp.innerHTML = `Timestamp:<br>${serverTimestamp}<br>Time:<br>${now.toISOString()}`;
         });
         convertBtn.addEventListener('click', function() {
             const input = timestampInput.value.trim();
