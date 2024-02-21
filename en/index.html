@@ -88,7 +88,7 @@
 <body onload="redirectBasedOnLanguage()">
     <div class="container">
         <h1>Simple Timestamp Generator</h1>
-        <div class="timestamp" id="timestamp"><code>Get Timestamp</code></div>
+        <div class="timestamp" id="timestamp">Get Timestamp</div>
         <button class="generate-btn" id="generateBtn">Get Server Timestamp</button>
 
         <div class="converter">
@@ -108,9 +108,8 @@
         generateBtn.addEventListener('click', function() {
             const now = new Date();
             const serverTimestamp = now.getTime();
-            timestamp.innerHTML = `<code>Timestamp: ${serverTimestamp} - Time:${now.toISOString()}</code>`;
+            timestamp.innerHTML = `Timestamp: ${serverTimestamp} - Time:${now.toISOString()}`;
         });
-
         convertBtn.addEventListener('click', function() {
             const input = timestampInput.value.trim();
             let result;
