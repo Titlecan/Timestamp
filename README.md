@@ -1,5 +1,5 @@
 # Simple Timestamp Generator (STG)
-#简易时间戳生成器
+# 简易时间戳生成器
 
 ## 简介
 
