@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Timestamp Generator (STG)</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <title>简易时间戳生成器</title>
     <style>
         body {
             font-family: "微软雅黑", sans-serif;
@@ -12,7 +11,6 @@
             margin: 0;
             padding: 0;
         }
-
         .container {
             max-width: 600px;
             margin: 50px auto;
@@ -21,26 +19,16 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-
         h1 {
             text-align: center;
             margin-bottom: 30px;
         }
-
-        .ntp-server {
-            font-size: 14px;
-            color: #666;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
         .timestamp {
             font-size: 24px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 20px;
         }
-
         .generate-btn {
             display: block;
             width: 100%;
@@ -53,15 +41,12 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-
         .generate-btn:hover {
             background-color: #0056b3;
         }
-
         .converter {
             margin-top: 40px;
         }
-
         .converter input,
         .converter button {
             width: 100%;
@@ -71,7 +56,6 @@
             border-radius: 4px;
             border: 1px solid #ccc;
         }
-
         .converter button {
             background-color: #007bff;
             color: #fff;
@@ -83,44 +67,61 @@
             background-color: #0056b3;
         }
     </style>
+    <script>
+        function redirectBasedOnLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const langCode = userLang.substring(0, 2);
+            if (langCode !== 'zh') {
+                window.location.href = "/en/index.html";
+            }
+        }
+    </script>
 </head>
-<body>
+<body onload="redirectBasedOnLanguage()">
     <div class="container">
-        <h1>Simple Timestamp Generator (STG)</h1>
-        <p class="ntp-server">Based on server time</p>
-        <div class="timestamp" id="timestamp">Get Timestamp</div>
-        <button class="generate-btn" id="generateBtn">Get Server Timestamp</button>
-
+        <h1>简易时间戳生成器</h1>
+        <div class="timestamp" id="timestamp"><code>获取时间戳</code></div>
+        <button class="generate-btn" id="generateBtn">获取服务器时间戳</button>
         <div class="converter">
-            <input type="text" id="timestampInput" placeholder="Enter timestamp">
-            <button id="convertBtn">Convert to Date</button>
-            <div id="convertedDate"></div>
+            <input type="text" id="timestampInput" placeholder="输入时间戳或时间">
+            <button id="convertBtn">转换</button>
+            <div id="convertedResult"></div>
         </div>
     </div>
-
     <script>
         const generateBtn = document.getElementById('generateBtn');
         const timestamp = document.getElementById('timestamp');
         const convertBtn = document.getElementById('convertBtn');
         const timestampInput = document.getElementById('timestampInput');
-        const convertedDate = document.getElementById('convertedDate');
+        const convertedResult = document.getElementById('convertedResult');
 
         generateBtn.addEventListener('click', function() {
-            // 使用服务器时间生成时间戳
-            const serverTimestamp = new Date().getTime();
-            timestamp.innerHTML = serverTimestamp;
+            const now = new Date();
+            const serverTimestamp = now.getTime();
+            timestamp.innerHTML = `<code>时间戳: ${serverTimestamp} - 时间:${now.toISOString()}</code>`;
         });
-
-        convertBtn.addEventListener('click', function() {
-            // 将时间戳转换为日期
-            const inputTimestamp = parseInt(timestampInput.value);
-            if (!isNaN(inputTimestamp)) {
-                const date = new Date(inputTimestamp);
-                convertedDate.innerHTML = date.toString();
+        const now = new Date();
+        const serverTimestamp = now.getTime();
+        timestamp.innerHTML = `<code>时间戳: ${serverTimestamp} - 时间:${now.toISOString()}</code>`;
+    });
+    convertBtn.addEventListener('click', function() {
+        const input = timestampInput.value.trim();
+        let result;
+        if (!isNaN(input)) {
+            // 如果输入的是时间戳
+            const date = new Date(parseInt(input));
+            result = date.toISOString();
+        } else {
+            // 如果输入的是时间字符串
+            const date = new Date(input);
+            if (!isNaN(date.getTime())) {
+                result = date.getTime();
             } else {
-                convertedDate.innerHTML = "Invalid timestamp";
+                result = "Invalid input";
             }
-        });
-    </script>
+        }
+        convertedResult.innerHTML = result;
+    });
+</script>
 </body>
 </html>
