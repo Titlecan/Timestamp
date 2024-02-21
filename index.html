@@ -108,7 +108,7 @@
         generateBtn.addEventListener('click', function() {
             const now = new Date();
             const serverTimestamp = now.getTime();
-            timestamp.innerHTML = `时间戳: ${serverTimestamp} - 时间:${now.toISOString()}`;
+            timestamp.innerHTML = `时间戳: ${serverTimestamp}<br>时间:${now.toISOString()}`;
         });
 
         convertBtn.addEventListener('click', function() {
